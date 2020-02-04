@@ -1,0 +1,25 @@
+{
+  "name": "makerlandcar",
+  "version": "1.0.0",
+  "description": "An app designed to introduce people to programming.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LangArthur/MakerLandCar.git"
+  },
+  "keywords": [
+    "maker"
+  ],
+  "author": "Ltabis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LangArthur/MakerLandCar/issues"
+  },
+  "homepage": "https://github.com/LangArthur/MakerLandCar#readme",
+  "dependencies": {
+    "react-native": "^0.61.5"
+  }
+}
