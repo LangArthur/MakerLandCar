@@ -13,35 +13,34 @@ void setup() {
 void stopcar(bool debug = false)
 {
   digitalWrite(ENA, LOW);
-    digitalWrite(ENB, LOW);
-      if (debug)
-          Serial.println("Stop!");
+  digitalWrite(ENB, LOW);
+  if (debug)
+    Serial.println("Stop!");
 }
 
 void forward(bool debug, int16_t in_carSpeed)
 {
 
   analogWrite(ENA, in_carSpeed);
-    analogWrite(ENB, in_carSpeed);
-      digitalWrite(IN1, HIGH);
-        digitalWrite(IN2, LOW);
-	  digitalWrite(IN3, LOW);
-	    digitalWrite(IN4, HIGH);
-	      if (debug)
-	          Serial.println("Go forward!");
-		    delay(20);
-		      stopcar(true);
-		      }
+  analogWrite(ENB, in_carSpeed);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+	digitalWrite(IN3, LOW);
+	digitalWrite(IN4, HIGH);
+	if (debug)
+	  Serial.println("Go forward!");
+		delay(20);
+		stopcar(true);
+}
 
 void loop() {
   String c = {};
-    c = Serial.readString();
-      if (c == "f") {
-          forward(true, 180);
-	    }
-	      if (c == "s") {
-	          stopcar(true);
-		    }
-		      Serial.println(c);
-		      }
-
+  c = Serial.readString();
+  if (c == "f") {
+    forward(true, 180);
+  }
+  if (c == "s") {
+   stopcar(true);
+	}
+	Serial.println(c);
+}
