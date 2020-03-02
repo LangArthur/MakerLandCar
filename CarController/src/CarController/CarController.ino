@@ -4,8 +4,11 @@
 #define IN2 8
 #define IN3 9
 #define IN4 11
-#define TURN_DELAY 340
+// gospeed = 180 - turn_delay = 340 - godelay = 300
+#define TURN_DELAY 400
 #define GO_DELAY 300
+#define SPEED_GO 150
+#define SPEED_TURN 50
 
 #define LED_Pin 13
 void setup() {
@@ -91,19 +94,19 @@ void loop() {
      break;
   }
   if (c[i] == 'f') {
-    forward(true, 180);
+    forward(true, SPEED_GO);
   }
   if (c[i] == 'r') {
-    right(true, 180);
+    right(true, SPEED_TURN);
   }
   if (c[i] == 'l') {
-    left(true, 180);
+    left(true, SPEED_TURN);
   }
   if (c[i] == 's') {
     stopcar(true);
   }
   if (c[i] == 'b') {
-    back(true, 180);
+    back(true, SPEED_GO);
   }
   Serial.println(c);
   delay(1000);
