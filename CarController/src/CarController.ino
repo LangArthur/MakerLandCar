@@ -1,102 +1,46 @@
-#define C_LEFT 'l'
-#define C_RIGHT 'r'
-#define C_FORWARD 'f'
-#define C_BACK 'b'
+#define ENA 5
+#define ENB 6
+#define IN1 7
+#define IN2 8
+#define IN3 9
+#define IN4 11
 
-bool start = false;
-unsigned int commandsSize = 0;
-char commands[100];
-
-// put your setup code here, to run once:
+#define LED_Pin 13
 void setup() {
-
-}
-
-// put your main code here, to run repeatedly:
-void loop() {
-
-  // when you received all informations from user
-  if (received) {
-    //init commands array
-    // set commandsSize
-
-  // everything is ok, car can move
-  } else if (start) {
-   for (int i = 0; i < commandsSize; i++) {
-    switch(commandsSize[i]) {
-      case C_LEFT:
-        left();
-        break;
-       case C_RIGHT:
-        right();
-        break;
-       case C_FORWARD:
-        forward();
-        break;
-       case C_BACK:
-        back();
-        break;
-    }
-   }
+  Serial.begin(9600);
   }
+
+void stopcar(bool debug = false)
+{
+  digitalWrite(ENA, LOW);
+  digitalWrite(ENB, LOW);
+  if (debug)
+    Serial.println("Stop!");
 }
 
-void forward()
+void forward(bool debug, int16_t in_carSpeed)
 {
-  motor1.setSpeed(255);
-  motor1.run(FORWARD);
-  motor2.setSpeed(255);
-  motor2.run(FORWARD); 
-  motor3.setSpeed(255);
-  motor3.run(FORWARD); 
-  motor4.setSpeed(255);
-  motor4.run(FORWARD); 
+
+  analogWrite(ENA, in_carSpeed);
+  analogWrite(ENB, in_carSpeed);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+	digitalWrite(IN3, LOW);
+	digitalWrite(IN4, HIGH);
+	if (debug)
+	  Serial.println("Go forward!");
+		delay(20);
+		stopcar(true);
 }
 
-void back()
-{
-  motor1.setSpeed(255);
-  motor1.run(BACKWARD);
-  motor2.setSpeed(255);
-  motor2.run(BACKWARD);
-  motor3.setSpeed(255); 
-  motor3.run(BACKWARD);
-  motor4.setSpeed(255);
-  motor4.run(BACKWARD);
-}
-
-void left()
-{
-  motor1.setSpeed(255);
-  motor1.run(BACKWARD);
-  motor2.setSpeed(255); 
-  motor2.run(BACKWARD);
-  motor3.setSpeed(255); 
-  motor3.run(FORWARD); 
-  motor4.setSpeed(255); 
-  motor4.run(FORWARD);
-}
-
-void right()
-{
-  motor1.setSpeed(255);
-  motor1.run(FORWARD);
-  motor2.setSpeed(255); 
-  motor2.run(FORWARD); 
-  motor3.setSpeed(255);
-  motor3.run(BACKWARD); 
-  motor4.setSpeed(255); 
-  motor4.run(BACKWARD); 
-} 
-
-void Stop()
-{
-  motor1.setSpeed(0);
-  motor1.run(RELEASE);
-  motor2.setSpeed(0); 
-  motor2.run(RELEASE); 
-  motor3.setSpeed(0); 
-  motor3.run(RELEASE);
-  motor4.setSpeed(0); 
-  motor4.run(RELEASE); 
+void loop() {
+  String c = {};
+  c = Serial.readString();
+  if (c == "f") {
+    forward(true, 180);
+  }
+  if (c == "s") {
+   stopcar(true);
+	}
+	Serial.println(c);
 }
