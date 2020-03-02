@@ -81,10 +81,15 @@ void right(bool debug, int16_t in_carSpeed)
 }
 
 void loop() {
+  if (Serial.available() > 0) {
   String c = {};
   c = Serial.readString();
   int i = 0;
   while (i < c.length()) {
+  if (Serial.available() > 0 && Serial.readString() == "s") {
+     stopcar(true);
+     break;
+  }
   if (c[i] == 'f') {
     forward(true, 180);
   }
@@ -104,4 +109,5 @@ void loop() {
   delay(1000);
   i++;
   }
+}
 }
