@@ -22,9 +22,14 @@ const ViewStyles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         height: 100,
-        borderRadius: 10,
-        borderWidth: 1,
-        borderColor: 'blue',
+        margin: 4,
+    },
+
+    program: {
+        justifyContent: 'center',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
         margin: 4,
     },
 
@@ -34,16 +39,16 @@ const ViewStyles = StyleSheet.create({
         alignItems: 'center',
         width: 250,
         borderRadius: 10,
-        borderWidth: 1,
-        borderColor: 'green',
         backgroundColor: 'grey',
+        margin: 4,
     },
 
     itemtext: {
         fontSize: 16,
         fontWeight: 'bold',
         color: 'white',
-        margin: 4
+        marginLeft: 4,
+        marginRight: 4,
     },
 
     touchable: {
@@ -54,11 +59,12 @@ const ViewStyles = StyleSheet.create({
         right: 0,
     },
 
+    icon: {
+        margin: 10,
+    },
+
     ide: {
         flex: 1,
-        borderRadius: 10,
-        borderWidth: 1,
-        borderColor: 'red',
     },
 });
 
