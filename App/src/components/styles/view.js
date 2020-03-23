@@ -26,10 +26,19 @@ const ViewStyles = StyleSheet.create({
     },
 
     program: {
-        justifyContent: 'center',
-        flexDirection: 'column',
+        flex: 1,
         alignItems: 'center',
         textAlign: 'center',
+        margin: 4,
+    },
+
+    programitem: {
+        alignItems: 'center',
+        width: 150,
+        height: 200,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: 'black',
         margin: 4,
     },
 
@@ -57,10 +66,6 @@ const ViewStyles = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 0,
-    },
-
-    icon: {
-        margin: 10,
     },
 
     ide: {

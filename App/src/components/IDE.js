@@ -60,16 +60,36 @@ var InstructionsData = [
 
 class HorizontalFlatListInstrutionsItem extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.deleteItem = this.deleteItem.bind(this);
+  }
+
+  deleteItem() {
+    this.props.del(this.props.item.id);
+  }
+
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={ ViewStyles.programitem }>
         <Icon name={ this.props.item.icon }
               size={ 100 }
-              color='black'
-              style={ ViewStyles.icon }/>
+              color='black'/>
         <Text style={{ fontSize: 20 }}>
           { this.props.item.name }
         </Text>
+        { this.props.item.id != 0 &&
+          <View style={{
+            flex: 1,
+            justifyContent: 'flex-end',
+            margin: 10}}
+          >
+            <Button title='Supprimer'
+                    color='red'
+                    onPress={ this.deleteItem }/>
+          </View>
+          }
       </View>
     );
   }
@@ -97,12 +117,11 @@ class HorizontalFlatListInstrutions extends Component {
           data={ this.props.getData() }
           renderItem={({ item }) => {
               return (
-                <HorizontalFlatListInstrutionsItem item={ item }/>
+                <HorizontalFlatListInstrutionsItem item={ item } del={ this.props.del }/>
               );
             }
           }
           keyExtractor={ ( item ) => item.id.toString() }
-          // keyExtractor={item => item.name}
           >
         </FlatList>
       </View>
@@ -190,6 +209,7 @@ class IDE extends Component {
     }   
 
     this.addInstruction = this.addInstruction.bind(this);
+    this.delInstruction = this.delInstruction.bind(this);
     this.getData = this.getData.bind(this);
   }
 
@@ -206,6 +226,11 @@ class IDE extends Component {
     this.setState({id: this.state.id + 1});
   }
 
+  delInstruction(id) {
+    const newInstructions = this.state.instructions.filter(item => item.id !== id);
+    this.setState({ instructions: newInstructions });
+  }
+
   getData() {
     return (this.state.instructions);
   }
@@ -220,7 +245,7 @@ class IDE extends Component {
           borderColor: 'black',
           margin: 4,       
         }}>
-          <HorizontalFlatListInstrutions getData={ this.getData }/>
+          <HorizontalFlatListInstrutions getData={ this.getData } del={ this.delInstruction }/>
         </View>
         <HorizontalFlatList method={ this.addInstruction }/>
         <View style={{ margin: 4 }}>
