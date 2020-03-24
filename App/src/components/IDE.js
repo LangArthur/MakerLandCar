@@ -6,7 +6,7 @@
  */
 
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, Button } from 'react-native';
+import { View, Text, TouchableOpacity, Button, Dimensions } from 'react-native';
 
 import ViewStyles from './styles/view'
 import { FlatList } from 'react-native-gesture-handler';
@@ -64,6 +64,15 @@ class HorizontalFlatListInstrutionsItem extends Component {
     super(props);
 
     this.deleteItem = this.deleteItem.bind(this);
+    const isPortrait = () => {
+      const dim = Dimensions.get('screen');
+      return dim.height >= dim.width;
+    };
+  
+    this.portrait = isPortrait();
+      Dimensions.addEventListener('change', () => {
+      this.portrait = isPortrait();
+      });
   }
 
   deleteItem() {
@@ -71,27 +80,51 @@ class HorizontalFlatListInstrutionsItem extends Component {
   }
 
   render() {
-    return (
-      <View style={ ViewStyles.programitem }>
-        <Icon name={ this.props.item.icon }
-              size={ 100 }
-              color='black'/>
-        <Text style={{ fontSize: 20 }}>
-          { this.props.item.name }
-        </Text>
-        { this.props.item.id != 0 &&
-          <View style={{
-            flex: 1,
-            justifyContent: 'flex-end',
-            margin: 10,}}
-          >
-            <Button title='Supprimer'
-                    color='red'
-                    onPress={ this.deleteItem }/>
-          </View>
-          }
-      </View>
-    );
+    if (this.portrait) {
+      return (
+        <View style={ ViewStyles.programitem }>
+          <Icon name={ this.props.item.icon }
+                size={ 100 }
+                color='black'/>
+          <Text style={{ fontSize: 20 }}>
+            { this.props.item.name }
+          </Text>
+          { this.props.item.id != 0 &&
+            <View style={{
+              flex: 1,
+              justifyContent: 'flex-end',
+              margin: 10,}}
+            >
+              <Button title='Supprimer'
+                      color='red'
+                      onPress={ this.deleteItem }/>
+            </View>
+            }
+        </View>
+      );
+    } else {
+      return (
+        <View style={ ViewStyles.horizontalprogramitem }>
+          <Icon name={ this.props.item.icon }
+                size={ 50 }
+                color='black'/>
+          <Text style={{ fontSize: 20 }}>
+            { this.props.item.name }
+          </Text>
+          { this.props.item.id != 0 &&
+            <View style={{
+              flex: 1,
+              justifyContent: 'flex-end',
+              margin: 10,}}
+            >
+              <Button title='Supprimer'
+                      color='red'
+                      onPress={ this.deleteItem }/>
+            </View>
+            }
+        </View>
+      );
+    }
   }
 }
 
@@ -179,10 +212,10 @@ class HorizontalFlatList extends Component {
             horizontal={ true }
             data={ InstructionsData }
             renderItem={({ item, index }) => {
-              return (
-                <HorizontalFlatListItem item={ item } index={ index } method={ this.props.method }/>
-              );
-            }}
+                return (
+                  <HorizontalFlatListItem item={ item } index={ index } method={ this.props.method }/>
+                );
+          }}
             keyExtractor={ (item) => item.name }
           >
           </FlatList>

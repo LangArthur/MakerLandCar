@@ -7,6 +7,7 @@
 
 import { StyleSheet } from 'react-native';
 
+
 const ViewStyles = StyleSheet.create({
 
     content: {
@@ -37,6 +38,16 @@ const ViewStyles = StyleSheet.create({
         alignSelf: 'center',
         width: 150,
         height: 200,
+        borderRadius: 10,
+        backgroundColor: '#f5f5f5',
+        margin: 4,
+    },
+
+    horizontalprogramitem: {
+        alignItems: 'center',
+        alignSelf: 'center',
+        width: 150,
+        height: 130,
         borderRadius: 10,
         backgroundColor: '#f5f5f5',
         margin: 4,
