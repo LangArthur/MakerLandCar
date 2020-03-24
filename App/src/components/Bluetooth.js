@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
 
   deviceName: {
     fontSize: 17,
-    color: "#f5f5f5"
+    color: "black"
   },
   deviceNameWrap: {
     margin: 10,
