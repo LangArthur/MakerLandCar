@@ -21,6 +21,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 // Project imports.
 import ConnectButton from "./src/components/ConnectButton"
 import ViewStyles from './src/components/styles/view'
+import Bluetooth from "./src/components/Bluetooth"
 import IDE from "./src/components/IDE"
 
 // navigator to redirect to a specific page.
@@ -31,8 +32,9 @@ const App: () => React$Node = () => {
   return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Se connecter">
-          <Stack.Screen name="Se connecter" component={Connect} />
-          <Stack.Screen name="Programmer" component={IDE} />
+          <Stack.Screen name="Se connecter" component={ Connect } />
+          <Stack.Screen name="Bluetooth" component={ Bluetooth } />
+          <Stack.Screen name="Programmer" component={ IDE } />
         </Stack.Navigator>
       </NavigationContainer>
     );

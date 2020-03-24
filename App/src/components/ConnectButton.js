@@ -18,7 +18,7 @@ const ConnectButton: () => React$Node = () => {
     return (
             <Button
                 title="Se connecter à la MakerLandCar!"
-                onPress={() => navigation.navigate('Programmer')}
+                onPress={() => navigation.navigate('Bluetooth')}
             />
       );
 };  

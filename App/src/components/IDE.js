@@ -12,17 +12,9 @@ import ViewStyles from './styles/view'
 import { FlatList } from 'react-native-gesture-handler';
 
 import Icon from 'react-native-vector-icons/Ionicons'
-import { ThemeConsumer } from 'react-native-elements';
+import BluetoothSerial from 'react-native-bluetooth-serial'
 
-// Temporary.
-const exampleData = [...Array(20)].map((d, index) => ({
-    key: `item-${index}`, // For example only -- don't use index as your key!
-    label: index,
-    backgroundColor: `rgb(${Math.floor(Math.random() * 255)}, ${index *
-      5}, ${132})`
-  }));
-
-// Temporary.
+// All possible instructions.
 var InstructionsData = [
 
   {
@@ -30,30 +22,35 @@ var InstructionsData = [
     icon: 'md-arrow-up',
     description: 'La voiture avance',
     id: 0,
+    val: 'f',
   },
   {
     name: 'Arrière',
     icon: 'md-arrow-down',
     description: 'La voiture recule',
     id: 0,
+    val: 'b',
   },
   {
     name: 'Gauche',
     icon: 'md-arrow-back',
     description: 'La voiture tourne à gauche',
     id: 0,
+    val: 'l',
   },
   {
     name: 'Droite',
     icon: 'md-arrow-forward',
     description: 'La voiture tourne à droite',
     id: 0,
+    val: 'r',
   },
   {
     name: 'Stop',
     icon: 'md-alert',
     description: 'La voiture s\'arrète',
     id: 0,
+    val: '',
   },
 
 ];
@@ -143,7 +140,9 @@ class HorizontalFlatListItem extends Component {
               {
                 name: this.props.item.name,
                 icon: this.props.item.icon,
-                description: this.props.item.description,            
+                description: this.props.item.description,
+                id: this.props.item.id,
+                val: this.props.item.val,
               }
           )
         }}
@@ -203,14 +202,34 @@ class IDE extends Component {
           icon: 'md-play-circle',
           description: 'La voiture démarre',
           id: 0,
+          val: '',
         },
       ],
-      id: 1
+      id: 1,
+      navigation: this.props.navigation,
     }   
 
     this.addInstruction = this.addInstruction.bind(this);
     this.delInstruction = this.delInstruction.bind(this);
+    this.sendMessage = this.sendMessage.bind(this);
     this.getData = this.getData.bind(this);
+    this.launch = this.launch.bind(this);
+  }
+
+  launch() {
+    for (const index in this.state.instructions) {
+      this.sendMessage(this.state.instructions[index].val);    
+    }
+  }
+
+  sendMessage(message) {
+    if (message === undefined)
+      return;
+    BluetoothSerial.write(message)
+    .then((res) => {
+      this.setState({ connected: true })
+    })
+    .catch((err) => console.log(err.message))
   }
 
   addInstruction(newInstruction) {
@@ -236,6 +255,7 @@ class IDE extends Component {
   }
 
   render () {
+
     return(
       <View style={ ViewStyles.ide }>
         <View style={{
@@ -250,54 +270,14 @@ class IDE extends Component {
         <HorizontalFlatList method={ this.addInstruction }/>
         <View style={{ margin: 4 }}>
             <Button title="Lancer"
-            style={{ height: 100 }}/>
+            style={{ height: 100 }}
+            onPress={() => {
+              this.launch();
+            }}/>
         </View>
       </View>
     );
   }
 }
-
-// class IDE extends Component {
-
-//   state = {
-//       data: exampleData
-//     };
-
-//   renderItem = ({ item, index, drag, isActive }) => {
-//     return (
-//       <TouchableOpacity
-      
-//         style={{
-//           height: 150,
-//           width: 150,
-//           backgroundColor: isActive ? "blue" : item.backgroundColor,
-//           alignItems: "center",
-//           justifyContent: "center"
-//         }}
-//         // When tapping a cell.
-//         delayLongPress={100}
-//         onLongPress={drag}
-//       >
-//         <Text style={TextStyle.ButtonText}>
-//           {item.label}
-//         </Text>
-//       </TouchableOpacity>
-//     );
-//   };
-
-//   render() {
-//     return(
-//       <View style={ViewStyles.ide}>
-//           <DraggableFlatList
-//           data={this.state.data}
-//           renderItem={this.renderItem}
-//           keyExtractor={(item, index) => `draggable-item-${item.key}`}
-//           onDragEnd={({ data }) => this.setState({ data })}
-//           horizontal={true}
-//           />
-//       </View>
-//     );
-//   }
-// }
 
 export default IDE;
