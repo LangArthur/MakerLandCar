@@ -80,7 +80,7 @@ class HorizontalFlatListInstrutionsItem extends Component {
           <View style={{
             flex: 1,
             justifyContent: 'flex-end',
-            margin: 10}}
+            margin: 10,}}
           >
             <Button title='Supprimer'
                     color='red'
@@ -260,10 +260,9 @@ class IDE extends Component {
       <View style={ ViewStyles.ide }>
         <View style={{
           flex: 1,
-          borderRadius: 10,
-          borderWidth: 1,
-          borderColor: 'black',
-          margin: 4,       
+          borderWidth: 0,
+          backgroundColor: '#5294ff',
+          margin: 0,
         }}>
           <HorizontalFlatListInstrutions getData={ this.getData } del={ this.delInstruction }/>
         </View>
