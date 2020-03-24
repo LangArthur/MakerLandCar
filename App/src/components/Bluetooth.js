@@ -96,7 +96,7 @@ export default class Bluetooth extends Component {
         <View style={ styles.toolbar }>
             <Text style={styles.toolbarTitle }>Liste des appareils avec bluetooth</Text>
             { this.state.isEnabled === false ?
-                <Text style={ styles.toolbarTitle }>Bluetooth éteint</Text>
+                <Text style={ styles.toolbarTitleError }>Bluetooth éteint</Text>
                 :
                 <Text style={ styles.toolbarTitle }>Appareils détectés</Text>
             }
@@ -149,6 +149,15 @@ const styles = StyleSheet.create({
     flex:1,
     marginTop:6,
     color: 'white',
+  },
+
+  toolbarTitleError:{
+    textAlign:'center',
+    fontWeight:'bold',
+    fontSize: 20,
+    flex:1,
+    marginTop:6,
+    color: 'red',
   },
 
   deviceName: {
