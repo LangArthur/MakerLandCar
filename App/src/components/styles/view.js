@@ -34,11 +34,11 @@ const ViewStyles = StyleSheet.create({
 
     programitem: {
         alignItems: 'center',
+        alignSelf: 'center',
         width: 150,
         height: 200,
         borderRadius: 10,
-        borderWidth: 1,
-        borderColor: 'black',
+        backgroundColor: '#f5f5f5',
         margin: 4,
     },
 
