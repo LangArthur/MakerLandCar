@@ -94,20 +94,18 @@ export default class Bluetooth extends Component {
     return (
       <View style={ styles.container }>
         <View style={ styles.toolbar }>
-            <Text style={styles.toolbarTitle } color='red'>Liste des appareils avec bluetooth</Text>
+            <Text style={styles.toolbarTitle }>Liste des appareils avec bluetooth</Text>
             { this.state.isEnabled === false ?
-                <Text style={ styles.toolbarTitle } color='red'>Bluetooth éteint</Text>
+                <Text style={ styles.toolbarTitle }>Bluetooth éteint</Text>
                 :
-                <Text style={ styles.toolbarTitle } color='blue'>Appareils détectés</Text>
+                <Text style={ styles.toolbarTitle }>Appareils détectés</Text>
             }
         </View>
         <FlatList
           style={{ 
               flex:1,
-              borderWidth: 1,
-              borderRadius: 10,
-              borderColor: 'black',
               margin: 4,
+              backgroundColor: '#f5f5f5'
             }}
           data={ this.state.devices }
           keyExtractor={ item => item.id }
@@ -130,16 +128,15 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#f5f5f5',
   },
   toolbar:{
     paddingTop:30,
     paddingBottom:30,
     flexDirection:'row',
-    borderWidth: 1,
     borderRadius: 10,
-    borderColor: 'black',
-    margin: 4,
+    margin: 10,
+    backgroundColor: '#5294ff',
   },
   toolbarButton:{
     width: 50,
@@ -151,10 +148,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     flex:1,
     marginTop:6,
+    color: 'white',
   },
+
   deviceName: {
     fontSize: 17,
-    color: "black"
+    color: "#f5f5f5"
   },
   deviceNameWrap: {
     margin: 10,
