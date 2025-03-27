@@ -3,6 +3,9 @@ Code for our MakerLand's Festival project : a car that initiate at coding
 
 More info about MakerLand Festival here : https://www.maker-land.com
 
+THIS PROJECT IS NOT MAINTAINED ANYMORE
+so be carefull when using it since vulnerabilites can be present in dependencies
+
 ## The App
 
 Application allow you to controle the arduino car.
